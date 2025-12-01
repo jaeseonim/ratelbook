@@ -265,11 +265,14 @@ const PostModal = ({ isOpen, onClose, onSubmit }) => {
         if (!selectedBookId) return;
 
         const book = BOOK_DB.find(b => b.id === parseInt(selectedBookId));
+        const now = new Date();
+        const formattedDate = `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
         onSubmit({
             type,
             book,
             condition: type === 'sell' ? condition : null,
-            date: new Date().toLocaleDateString(),
+            date: formattedDate,
         });
 
         // Reset
@@ -398,7 +401,7 @@ function App() {
             type: 'buy',
             book: BOOK_DB[0],
             author: { name: '이영희', studentId: '21학번' },
-            date: '2023.10.25',
+            date: '2023.10.25 14:30',
             status: 'active',
         },
         {
@@ -407,7 +410,7 @@ function App() {
             book: BOOK_DB[1],
             author: { name: '박철수', studentId: '20학번' },
             condition: '필기 흔적 없음, 새 책 수준',
-            date: '2023.10.26',
+            date: '2023.10.26 09:15',
             status: 'active',
         }
     ]);
@@ -541,7 +544,7 @@ function App() {
                 {/* Notice */}
                 <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center text-sm text-blue-800 space-y-2">
                     <p>📚 모든 책의 가격은 <strong>교보문고 정가의 25%</strong>로 일괄 책정되었습니다.</p>
-                    <p>💡 거래가 성사되면 <strong>버튼을 누른 분</strong>이 상대방에게 먼저 연락해서 자유롭게 거래하세요!</p>
+                    <p>💡 거래가 성사되면 <strong>버튼을 누른 분</strong>이 상대방에게 먼저 연락해주세요! (동일한 책은 <strong>먼저 등록된 순서대로</strong> 거래해주세요)</p>
                 </div>
 
                 {filteredPosts.length === 0 ? (
