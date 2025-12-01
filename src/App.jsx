@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Book, Search, Plus, User, CheckCircle, ShoppingBag, Tag, X, LogOut, Trash2 } from 'lucide-react';
+import { db } from './firebase';
+import { collection, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, doc } from 'firebase/firestore';
 
 // --- Mock Data & Constants ---
 
@@ -394,26 +396,21 @@ function App() {
     const [activeTab, setActiveTab] = useState('buy'); // 'buy', 'sell', 'completed'
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Mock Database State
-    const [posts, setPosts] = useState([
-        {
-            id: 101,
-            type: 'buy',
-            book: BOOK_DB[0],
-            author: { name: '이영희', studentId: '21학번' },
-            date: '2023.10.25 14:30',
-            status: 'active',
-        },
-        {
-            id: 102,
-            type: 'sell',
-            book: BOOK_DB[1],
-            author: { name: '박철수', studentId: '20학번' },
-            condition: '필기 흔적 없음, 새 책 수준',
-            date: '2023.10.26 09:15',
-            status: 'active',
-        }
-    ]);
+    // Firestore State
+    const [posts, setPosts] = useState([]);
+
+    // Real-time subscription
+    useEffect(() => {
+        const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const postsData = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setPosts(postsData);
+        });
+        return () => unsubscribe();
+    }, []);
 
     // Load user from local storage on mount
     useEffect(() => {
@@ -433,36 +430,44 @@ function App() {
         localStorage.removeItem('ratelbook_user');
     };
 
-    const handleCreatePost = (postData) => {
-        const newPost = {
-            id: Date.now(),
-            ...postData,
-            author: user,
-            status: 'active',
-        };
-        setPosts([newPost, ...posts]);
+    const handleCreatePost = async (postData) => {
+        try {
+            await addDoc(collection(db, "posts"), {
+                ...postData,
+                author: user,
+                status: 'active',
+                createdAt: new Date().toISOString()
+            });
+        } catch (error) {
+            console.error("Error adding document: ", error);
+            alert("글 등록 중 오류가 발생했습니다.");
+        }
     };
 
-    const handleTrade = (post) => {
+    const handleTrade = async (post) => {
         if (!confirm(`${post.type === 'buy' ? '판매' : '구매'}하시겠습니까?\n\n※ 주의: 이 작업은 되돌릴 수 없습니다!`)) return;
 
-        const updatedPosts = posts.map(p => {
-            if (p.id === post.id) {
-                return {
-                    ...p,
-                    status: 'completed',
-                    trader: user,
-                };
-            }
-            return p;
-        });
-        setPosts(updatedPosts);
-        alert('거래가 성사되었습니다! [거래완료] 탭에서 확인하세요.');
+        try {
+            const postRef = doc(db, "posts", post.id);
+            await updateDoc(postRef, {
+                status: 'completed',
+                trader: user
+            });
+            alert('거래가 성사되었습니다! [거래완료] 탭에서 확인하세요.');
+        } catch (error) {
+            console.error("Error updating document: ", error);
+            alert("거래 처리 중 오류가 발생했습니다.");
+        }
     };
 
-    const handleDeletePost = (post) => {
+    const handleDeletePost = async (post) => {
         if (!confirm('정말로 이 게시글을 삭제하시겠습니까?')) return;
-        setPosts(posts.filter(p => p.id !== post.id));
+        try {
+            await deleteDoc(doc(db, "posts", post.id));
+        } catch (error) {
+            console.error("Error deleting document: ", error);
+            alert("삭제 중 오류가 발생했습니다.");
+        }
     };
 
     if (!user) {
