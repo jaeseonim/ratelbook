@@ -108,23 +108,23 @@ const LoginScreen = ({ onLogin }) => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-blue-50 p-4">
-            <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+        <div className="min-h-screen flex items-center justify-center bg-slate-950 p-4">
+            <div className="bg-slate-900 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-slate-800">
                 <div className="text-center mb-8">
-                    <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Book className="w-8 h-8 text-blue-600" />
+                    <div className="bg-slate-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-700">
+                        <Book className="w-8 h-8 text-cyan-400" />
                     </div>
-                    <h1 className="text-2xl font-bold text-gray-800">RatelBook</h1>
-                    <p className="text-gray-500 mt-2">책 교환 플랫폼</p>
+                    <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">RatelBook</h1>
+                    <p className="text-slate-400 mt-2">책 교환 플랫폼</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">이름</label>
+                        <label className="block text-sm font-medium text-slate-300 mb-1">이름</label>
                         <input
                             type="text"
                             required
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                            className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition placeholder-slate-500"
                             placeholder="이름을 입력하세요"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -132,10 +132,10 @@ const LoginScreen = ({ onLogin }) => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">학번</label>
+                        <label className="block text-sm font-medium text-slate-300 mb-1">학번</label>
                         <div className="relative">
                             <select
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none appearance-none bg-white"
+                                className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none appearance-none"
                                 value={studentId}
                                 onChange={(e) => setStudentId(e.target.value)}
                             >
@@ -144,14 +144,14 @@ const LoginScreen = ({ onLogin }) => {
                                 ))}
                             </select>
                             <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                                <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                <svg className="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
                         </div>
                     </div>
 
                     <button
                         type="submit"
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition duration-200 shadow-md transform active:scale-[0.98]"
+                        className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 rounded-lg transition duration-200 shadow-lg shadow-cyan-500/20 transform active:scale-[0.98]"
                     >
                         입장하기
                     </button>
@@ -169,32 +169,32 @@ const BookCard = ({ post, currentUser, onTrade, onDelete }) => {
     const sellPrice = post.book.originalPrice * 0.25;
 
     return (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
+        <div className="bg-slate-900 rounded-xl shadow-lg border border-slate-800 overflow-hidden hover:border-cyan-500/50 transition-colors duration-200">
             <div className="flex p-4 gap-4">
                 <div className="flex-1 flex flex-col justify-between">
                     <div>
                         <div className="flex justify-between items-start">
-                            <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full mb-1 inline-block">
+                            <span className="text-xs font-medium text-cyan-400 bg-cyan-950/50 border border-cyan-900 px-2 py-0.5 rounded-full mb-1 inline-block">
                                 {post.book.genre}
                             </span>
-                            <span className="text-xs text-gray-400">{post.date}</span>
+                            <span className="text-xs text-slate-500">{post.date}</span>
                         </div>
-                        <h3 className="font-bold text-gray-800 line-clamp-1">{post.book.title}</h3>
-                        <p className="text-sm text-gray-500">{post.book.author}</p>
+                        <h3 className="font-bold text-slate-100 line-clamp-1">{post.book.title}</h3>
+                        <p className="text-sm text-slate-400">{post.book.author}</p>
 
                         <div className="mt-2 flex items-baseline gap-2">
-                            <span className="text-lg font-bold text-blue-600">{formatPrice(sellPrice)}</span>
-                            <span className="text-xs text-gray-400 line-through">{formatPrice(post.book.originalPrice)}</span>
+                            <span className="text-lg font-bold text-cyan-400">{formatPrice(sellPrice)}</span>
+                            <span className="text-xs text-slate-600 line-through">{formatPrice(post.book.originalPrice)}</span>
                         </div>
                     </div>
 
                     <div className="mt-2 flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-xs text-gray-500">
+                        <div className="flex items-center gap-2 text-xs text-slate-500">
                             <User className="w-3 h-3" />
                             <span>{post.author.name} ({post.author.studentId})</span>
                         </div>
                         {post.type === 'sell' && (
-                            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                            <span className="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded border border-slate-700">
                                 {post.condition || '상태 양호'}
                             </span>
                         )}
@@ -206,10 +206,10 @@ const BookCard = ({ post, currentUser, onTrade, onDelete }) => {
                 <div className="px-4 pb-4">
                     <button
                         onClick={() => onTrade(post)}
-                        className={`w-full py-2.5 rounded-lg font-medium text-sm transition-colors flex items-center justify-center gap-2
+                        className={`w-full py-2.5 rounded-lg font-medium text-sm transition-all flex items-center justify-center gap-2
               ${post.type === 'buy'
-                                ? 'bg-blue-600 text-white hover:bg-blue-700'
-                                : 'bg-green-600 text-white hover:bg-green-700'}`}
+                                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-900/20'
+                                : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-lg shadow-emerald-900/20'}`}
                     >
                         {post.type === 'buy' ? (
                             <>
@@ -228,7 +228,7 @@ const BookCard = ({ post, currentUser, onTrade, onDelete }) => {
                 <div className="px-4 pb-4">
                     <button
                         onClick={() => onDelete(post)}
-                        className="w-full py-2.5 rounded-lg font-medium text-sm bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
+                        className="w-full py-2.5 rounded-lg font-medium text-sm bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-red-400 transition-colors flex items-center justify-center gap-2 border border-slate-700"
                     >
                         <Trash2 className="w-4 h-4" /> 삭제하기
                     </button>
@@ -236,12 +236,12 @@ const BookCard = ({ post, currentUser, onTrade, onDelete }) => {
             )}
 
             {isCompleted && (
-                <div className="bg-gray-50 px-4 py-3 border-t border-gray-100 flex justify-between items-center">
-                    <div className="flex items-center gap-2 text-green-600 font-medium text-sm">
+                <div className="bg-slate-950/50 px-4 py-3 border-t border-slate-800 flex justify-between items-center">
+                    <div className="flex items-center gap-2 text-emerald-500 font-medium text-sm">
                         <CheckCircle className="w-4 h-4" />
                         거래 완료
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-slate-600">
                         {post.trader ? `with ${post.trader.name}` : ''}
                     </div>
                 </div>
@@ -286,11 +286,11 @@ const PostModal = ({ isOpen, onClose, onSubmit }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-            <div className="bg-white w-full max-w-md sm:rounded-2xl rounded-t-2xl max-h-[90vh] overflow-y-auto">
-                <div className="p-4 border-b border-gray-100 flex justify-between items-center sticky top-0 bg-white z-10">
-                    <h2 className="text-lg font-bold">새로운 거래 등록</h2>
-                    <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+            <div className="bg-slate-900 w-full max-w-md sm:rounded-2xl rounded-t-2xl max-h-[90vh] overflow-y-auto border border-slate-800 shadow-2xl">
+                <div className="p-4 border-b border-slate-800 flex justify-between items-center sticky top-0 bg-slate-900/95 backdrop-blur z-10">
+                    <h2 className="text-lg font-bold text-white">새로운 거래 등록</h2>
+                    <button onClick={onClose} className="p-2 hover:bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors">
                         <X className="w-5 h-5" />
                     </button>
                 </div>
@@ -301,16 +301,16 @@ const PostModal = ({ isOpen, onClose, onSubmit }) => {
                         <button
                             type="button"
                             onClick={() => setType('buy')}
-                            className={`p-3 rounded-xl border-2 font-bold text-sm transition-all
-                ${type === 'buy' ? 'border-blue-600 bg-blue-50 text-blue-600' : 'border-gray-200 text-gray-500'}`}
+                            className={`p-3 rounded-xl border font-bold text-sm transition-all
+                ${type === 'buy' ? 'border-blue-500 bg-blue-500/10 text-blue-400' : 'border-slate-700 bg-slate-800 text-slate-500 hover:bg-slate-700'}`}
                         >
                             구매 희망 (구해요)
                         </button>
                         <button
                             type="button"
                             onClick={() => setType('sell')}
-                            className={`p-3 rounded-xl border-2 font-bold text-sm transition-all
-                ${type === 'sell' ? 'border-blue-600 bg-blue-50 text-blue-600' : 'border-gray-200 text-gray-500'}`}
+                            className={`p-3 rounded-xl border font-bold text-sm transition-all
+                ${type === 'sell' ? 'border-blue-500 bg-blue-500/10 text-blue-400' : 'border-slate-700 bg-slate-800 text-slate-500 hover:bg-slate-700'}`}
                         >
                             판매 희망 (팔아요)
                         </button>
@@ -318,35 +318,35 @@ const PostModal = ({ isOpen, onClose, onSubmit }) => {
 
                     {/* Book Selection */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">책 선택</label>
+                        <label className="block text-sm font-medium text-slate-300 mb-2">책 선택</label>
                         <div className="relative mb-2">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                             <input
                                 type="text"
                                 placeholder="책 제목 또는 저자 검색..."
-                                className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full pl-9 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:ring-2 focus:ring-cyan-500 outline-none placeholder-slate-500"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
                         </div>
 
-                        <div className="border border-gray-200 rounded-lg max-h-48 overflow-y-auto divide-y divide-gray-100">
+                        <div className="border border-slate-700 rounded-lg max-h-48 overflow-y-auto divide-y divide-slate-800 bg-slate-800/50">
                             {filteredBooks.map(book => (
                                 <div
                                     key={book.id}
                                     onClick={() => setSelectedBookId(book.id)}
-                                    className={`p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-50 transition-colors
-                    ${selectedBookId === book.id ? 'bg-blue-50' : ''}`}
+                                    className={`p-3 flex items-center gap-3 cursor-pointer hover:bg-slate-700/50 transition-colors
+                    ${selectedBookId === book.id ? 'bg-cyan-900/20 border-l-2 border-cyan-500' : ''}`}
                                 >
                                     <div className="flex-1 min-w-0">
-                                        <div className="text-sm font-medium truncate">{book.title}</div>
-                                        <div className="text-xs text-gray-500">{book.author}</div>
+                                        <div className="text-sm font-medium truncate text-slate-200">{book.title}</div>
+                                        <div className="text-xs text-slate-500">{book.author}</div>
                                     </div>
-                                    {selectedBookId === book.id && <CheckCircle className="w-4 h-4 text-blue-600" />}
+                                    {selectedBookId === book.id && <CheckCircle className="w-4 h-4 text-cyan-500" />}
                                 </div>
                             ))}
                             {filteredBooks.length === 0 && (
-                                <div className="p-4 text-center text-sm text-gray-500">검색 결과가 없습니다</div>
+                                <div className="p-4 text-center text-sm text-slate-500">검색 결과가 없습니다</div>
                             )}
                         </div>
                     </div>
@@ -354,12 +354,12 @@ const PostModal = ({ isOpen, onClose, onSubmit }) => {
                     {/* Condition Input (Sell only) */}
                     {type === 'sell' && (
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                책 상태 코멘트 <span className="text-gray-400 font-normal">(선택사항)</span>
+                            <label className="block text-sm font-medium text-slate-300 mb-2">
+                                책 상태 코멘트 <span className="text-slate-500 font-normal">(선택사항)</span>
                             </label>
                             <textarea
                                 placeholder="예: 밑줄 조금 있음, 표지 약간 찢어짐 등"
-                                className="w-full p-3 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none resize-none h-24"
+                                className="w-full p-3 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:ring-2 focus:ring-cyan-500 outline-none resize-none h-24 placeholder-slate-500"
                                 value={condition}
                                 onChange={(e) => setCondition(e.target.value)}
                             />
@@ -368,9 +368,9 @@ const PostModal = ({ isOpen, onClose, onSubmit }) => {
 
                     {/* Price Info */}
                     {selectedBookId && (
-                        <div className="bg-gray-50 p-4 rounded-lg flex justify-between items-center">
-                            <span className="text-sm text-gray-600">거래 확정 가격 (정가의 25%)</span>
-                            <span className="text-lg font-bold text-blue-600">
+                        <div className="bg-slate-800 p-4 rounded-lg flex justify-between items-center border border-slate-700">
+                            <span className="text-sm text-slate-400">거래 확정 가격 (정가의 25%)</span>
+                            <span className="text-lg font-bold text-cyan-400">
                                 {formatPrice(BOOK_DB.find(b => b.id === parseInt(selectedBookId)).originalPrice * 0.25)}
                             </span>
                         </div>
@@ -379,7 +379,7 @@ const PostModal = ({ isOpen, onClose, onSubmit }) => {
                     <button
                         type="submit"
                         disabled={!selectedBookId}
-                        className="w-full bg-blue-600 disabled:bg-gray-300 text-white font-bold py-3.5 rounded-xl shadow-md active:scale-[0.98] transition-all"
+                        className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 disabled:from-slate-700 disabled:to-slate-700 disabled:text-slate-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-cyan-900/20 active:scale-[0.98] transition-all"
                     >
                         등록하기
                     </button>
@@ -483,47 +483,47 @@ function App() {
     });
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-20 sm:pb-0 relative">
+        <div className="min-h-screen bg-slate-950 pb-20 sm:pb-0 relative text-slate-200">
             {/* Header */}
-            <header className="bg-white border-b border-gray-200 sticky top-0 z-10 px-4 py-3 flex justify-between items-center">
+            <header className="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-10 px-4 py-3 flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                    <div className="bg-blue-600 p-1.5 rounded-lg">
+                    <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-1.5 rounded-lg shadow-lg shadow-cyan-500/20">
                         <Book className="w-5 h-5 text-white" />
                     </div>
-                    <h1 className="font-bold text-lg text-gray-800">RatelBook</h1>
+                    <h1 className="font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">RatelBook</h1>
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="text-right hidden sm:block">
-                        <div className="text-sm font-bold text-gray-800">{user.name}</div>
-                        <div className="text-xs text-gray-500">{user.studentId}</div>
+                        <div className="text-sm font-bold text-slate-200">{user.name}</div>
+                        <div className="text-xs text-slate-500">{user.studentId}</div>
                     </div>
-                    <button onClick={handleLogout} className="p-2 text-gray-400 hover:text-gray-600">
+                    <button onClick={handleLogout} className="p-2 text-slate-500 hover:text-slate-300 transition-colors">
                         <LogOut className="w-5 h-5" />
                     </button>
                 </div>
             </header>
 
             {/* Tabs */}
-            <div className="bg-white border-b border-gray-200 sticky top-[57px] z-10">
+            <div className="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-[57px] z-10">
                 <div className="flex max-w-3xl mx-auto">
                     <button
                         onClick={() => setActiveTab('buy')}
                         className={`flex-1 py-3 text-sm font-bold border-b-2 transition-colors
-              ${activeTab === 'buy' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+              ${activeTab === 'buy' ? 'border-cyan-500 text-cyan-400' : 'border-transparent text-slate-500 hover:text-slate-300'}`}
                     >
                         구해요
                     </button>
                     <button
                         onClick={() => setActiveTab('sell')}
                         className={`flex-1 py-3 text-sm font-bold border-b-2 transition-colors
-              ${activeTab === 'sell' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+              ${activeTab === 'sell' ? 'border-cyan-500 text-cyan-400' : 'border-transparent text-slate-500 hover:text-slate-300'}`}
                     >
                         팔아요
                     </button>
                     <button
                         onClick={() => setActiveTab('completed')}
                         className={`flex-1 py-3 text-sm font-bold border-b-2 transition-colors
-              ${activeTab === 'completed' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+              ${activeTab === 'completed' ? 'border-cyan-500 text-cyan-400' : 'border-transparent text-slate-500 hover:text-slate-300'}`}
                     >
                         거래완료
                     </button>
@@ -537,23 +537,23 @@ function App() {
                     href="https://docs.google.com/spreadsheets/d/1j5uoWPlVvrjccN4sk91rHF3qKzeNx1mRxdq122Bmbag/edit?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block bg-green-50 border border-green-200 rounded-xl p-4 text-center hover:bg-green-100 transition-colors group"
+                    className="block bg-emerald-900/20 border border-emerald-900/50 rounded-xl p-4 text-center hover:bg-emerald-900/30 transition-all group"
                 >
-                    <div className="flex items-center justify-center gap-2 text-green-700 font-bold">
+                    <div className="flex items-center justify-center gap-2 text-emerald-400 font-bold">
                         <Book className="w-5 h-5" />
                         <span>전체 책 목록 보기 (Google Sheets)</span>
                     </div>
-                    <p className="text-xs text-green-600 mt-1">클릭하여 거래 가능한 책 리스트를 확인하세요</p>
+                    <p className="text-xs text-emerald-600 mt-1">클릭하여 거래 가능한 책 리스트를 확인하세요</p>
                 </a>
 
                 {/* Notice */}
-                <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center text-sm text-blue-800 space-y-2">
-                    <p>📚 모든 책의 가격은 <strong>교보문고 정가의 25%</strong>로 일괄 책정되었습니다.</p>
-                    <p>💡 거래가 성사되면 <strong>버튼을 누른 분</strong>이 상대방에게 먼저 연락해주세요! (동일한 책은 <strong>먼저 등록된 순서대로</strong> 거래해주세요)</p>
+                <div className="bg-blue-900/20 border border-blue-900/50 rounded-xl p-4 text-center text-sm text-blue-300 space-y-2">
+                    <p>📚 모든 책의 가격은 <strong className="text-blue-200">교보문고 정가의 25%</strong>로 일괄 책정되었습니다.</p>
+                    <p>💡 거래가 성사되면 <strong className="text-blue-200">버튼을 누른 분</strong>이 상대방에게 먼저 연락해주세요! (동일한 책은 <strong className="text-blue-200">먼저 등록된 순서대로</strong> 거래해주세요)</p>
                 </div>
 
                 {filteredPosts.length === 0 ? (
-                    <div className="text-center py-20 text-gray-400">
+                    <div className="text-center py-20 text-slate-600">
                         <p>등록된 게시글이 없습니다.</p>
                     </div>
                 ) : (
@@ -572,7 +572,7 @@ function App() {
             {/* Floating Action Button */}
             <button
                 onClick={() => setIsModalOpen(true)}
-                className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95 z-20"
+                className="fixed bottom-6 right-6 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white p-4 rounded-full shadow-lg shadow-cyan-900/40 transition-transform hover:scale-105 active:scale-95 z-20"
             >
                 <Plus className="w-6 h-6" />
             </button>
