@@ -529,7 +529,8 @@ function App() {
                 {/* Notice */}
                 <div className="p-4 border-b border-neutral-800 bg-neutral-900/20">
                     <p className="text-sm text-neutral-400 mb-1">📚 모든 책의 가격은 <strong className="text-white">교보문고 정가의 25%</strong>입니다.</p>
-                    <p className="text-sm text-neutral-400">💡 거래는 <strong className="text-white">먼저 등록된 순서대로</strong> 진행해주세요.</p>
+                    <p className="text-sm text-neutral-400 mb-1">💡 거래는 <strong className="text-white">먼저 등록된 순서대로</strong> 진행해주세요.</p>
+                    <p className="text-sm text-neutral-400">📞 거래 시 <strong className="text-white">버튼을 나중에 누른 분</strong>이 먼저 연락해주세요!</p>
                 </div>
 
                 {filteredPosts.length === 0 ? (
